@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CA News feature.
+ */
+
+include_once('ca_news.features.inc');

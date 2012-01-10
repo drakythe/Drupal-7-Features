@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CA Sub Pages feature.
+ */
+
+include_once('ca_sub_pages.features.inc');
