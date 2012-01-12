@@ -33,7 +33,7 @@ function ca_staff_views_api() {
  */
 function ca_staff_node_info() {
   $items = array(
-    'staff' => array(
+    'ca_staff' => array(
       'name' => t('Staff'),
       'base' => 'node_content',
       'description' => '',

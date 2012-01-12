@@ -13,34 +13,19 @@ function ca_staff_default_page_manager_handlers() {
   $handler = new stdClass;
   $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
   $handler->api_version = 1;
-  $handler->name = 'ca_staff_node_view_panel_context';
+  $handler->name = 'node_view_panel_context';
   $handler->task = 'node_view';
   $handler->subtask = '';
   $handler->handler = 'panel_context';
   $handler->weight = 0;
   $handler->conf = array(
-    'title' => 'CA Staff',
+    'title' => 'CA Staff: Node Template One',
     'no_blocks' => 0,
     'pipeline' => 'standard',
     'css_id' => '',
     'css' => '',
     'contexts' => array(),
     'relationships' => array(),
-    'access' => array(
-      'plugins' => array(
-        0 => array(
-          'name' => 'node_type',
-          'settings' => array(
-            'type' => array(
-              'staff' => 'staff',
-            ),
-          ),
-          'context' => 'argument_entity_id:node_1',
-          'not' => FALSE,
-        ),
-      ),
-      'logic' => 'and',
-    ),
   );
   $display = new panels_display;
   $display->layout = 'onecol';
@@ -96,7 +81,7 @@ function ca_staff_default_page_manager_handlers() {
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-1';
   $handler->conf['display'] = $display;
-  $export['ca_staff_node_view_panel_context'] = $handler;
+  $export['node_view_panel_context'] = $handler;
 
   return $export;
 }
@@ -113,10 +98,7 @@ function ca_staff_default_page_manager_pages() {
   $page->admin_title = 'CA Staff';
   $page->admin_description = '';
   $page->path = 'staff/view';
-  $page->access = array(
-    'type' => 'none',
-    'settings' => NULL,
-  );
+  $page->access = array();
   $page->menu = array(
     'type' => 'default tab',
     'title' => 'View',
@@ -211,8 +193,6 @@ function ca_staff_default_page_manager_pages() {
       ),
     ),
     'logic' => 'and',
-    'type' => 'none',
-    'settings' => NULL,
   );
   $page->menu = array(
     'type' => 'tab',
@@ -247,7 +227,7 @@ function ca_staff_default_page_manager_pages() {
     'contexts' => array(),
     'relationships' => array(),
     'context_admin_options' => 'node_create_menu',
-    'context_admin_options_items' => 'staff',
+    'context_admin_options_items' => 'ca_staff',
     'context_admin_use_node_edit' => 0,
     'submitted_context' => 'empty',
   );
@@ -278,8 +258,6 @@ function ca_staff_default_page_manager_pages() {
       ),
     ),
     'logic' => 'and',
-    'type' => 'none',
-    'settings' => NULL,
   );
   $page->menu = array(
     'type' => 'default tab',
@@ -375,8 +353,6 @@ function ca_staff_default_page_manager_pages() {
       ),
     ),
     'logic' => 'and',
-    'type' => 'none',
-    'settings' => NULL,
   );
   $page->menu = array(
     'type' => 'tab',

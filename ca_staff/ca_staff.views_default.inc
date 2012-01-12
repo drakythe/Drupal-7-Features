@@ -120,7 +120,7 @@ function ca_staff_views_default_views() {
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['title']['link_to_node'] = 1;
-  /* Sort criterion: Broken/missing handler */
+  /* Sort criterion: Weight: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'node_weight';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
@@ -136,7 +136,7 @@ function ca_staff_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'staff' => 'staff',
+    'ca_staff' => 'ca_staff',
   );
 
   /* Display: CA Staff: Grid View Template One */
@@ -150,6 +150,32 @@ function ca_staff_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '0';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'weight';
+  $handler->display->display_options['style_options']['group_rendered'] = 1;
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'weight' => 'weight',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'weight' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['override'] = 1;
+  $handler->display->display_options['style_options']['sticky'] = 0;
+  $handler->display->display_options['style_options']['empty_table'] = 0;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
@@ -177,7 +203,7 @@ function ca_staff_views_default_views() {
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['title']['link_to_node'] = 1;
-  /* Field: Broken/missing handler */
+  /* Field: Weight: Weight */
   $handler->display->display_options['fields']['weight']['id'] = 'weight';
   $handler->display->display_options['fields']['weight']['table'] = 'node_weight';
   $handler->display->display_options['fields']['weight']['field'] = 'weight';
@@ -199,6 +225,7 @@ function ca_staff_views_default_views() {
   $handler->display->display_options['fields']['weight']['hide_empty'] = 0;
   $handler->display->display_options['fields']['weight']['empty_zero'] = 0;
   $handler->display->display_options['fields']['weight']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['weight']['format_plural'] = 0;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -212,7 +239,7 @@ function ca_staff_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'staff' => 'staff',
+    'ca_staff' => 'ca_staff',
   );
   $handler->display->display_options['pane_title'] = 'CA Staff: Sort';
 
@@ -427,7 +454,7 @@ function ca_staff_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'staff' => 'staff',
+    'ca_staff' => 'ca_staff',
   );
   $handler->display->display_options['pane_title'] = 'CA Staff: Admin';
 

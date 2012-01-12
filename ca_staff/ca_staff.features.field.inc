@@ -10,8 +10,8 @@
 function ca_staff_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-staff-body'
-  $fields['node-staff-body'] = array(
+  // Exported field: 'node-ca_staff-body'
+  $fields['node-ca_staff-body'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
@@ -39,7 +39,7 @@ function ca_staff_field_default_fields() {
       'type' => 'text_with_summary',
     ),
     'field_instance' => array(
-      'bundle' => 'staff',
+      'bundle' => 'ca_staff',
       'default_value' => NULL,
       'deleted' => '0',
       'description' => '',
@@ -82,8 +82,8 @@ function ca_staff_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-staff-field_ca_staff_s_image'
-  $fields['node-staff-field_ca_staff_s_image'] = array(
+  // Exported field: 'node-ca_staff-field_ca_staff_s_image'
+  $fields['node-ca_staff-field_ca_staff_s_image'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '-1',
@@ -112,7 +112,7 @@ function ca_staff_field_default_fields() {
       'type' => 'image',
     ),
     'field_instance' => array(
-      'bundle' => 'staff',
+      'bundle' => 'ca_staff',
       'deleted' => '0',
       'description' => '',
       'display' => array(
@@ -160,8 +160,8 @@ function ca_staff_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-staff-field_ca_staff_s_title'
-  $fields['node-staff-field_ca_staff_s_title'] = array(
+  // Exported field: 'node-ca_staff-field_ca_staff_s_title'
+  $fields['node-ca_staff-field_ca_staff_s_title'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
@@ -189,7 +189,7 @@ function ca_staff_field_default_fields() {
       'type' => 'text',
     ),
     'field_instance' => array(
-      'bundle' => 'staff',
+      'bundle' => 'ca_staff',
       'default_value' => NULL,
       'deleted' => '0',
       'description' => 'Corporate Title ("President", "Vice President", "Treasurer", "CEO", etc)',
