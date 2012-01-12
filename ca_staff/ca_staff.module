@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CA Staff feature.
+ */
+
+include_once('ca_staff.features.inc');
