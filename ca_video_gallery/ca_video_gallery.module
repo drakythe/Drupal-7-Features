@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CA Video Gallery feature.
+ */
+
+include_once('ca_video_gallery.features.inc');
