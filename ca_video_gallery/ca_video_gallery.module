@@ -5,3 +5,56 @@
  */
 
 include_once('ca_video_gallery.features.inc');
+
+/**
+ * Implements hook_menu()
+ */
+function ca_video_gallery_menu() {
+  $items['admin/config/worx_features/video_gallery'] = array(
+    'title' => 'Video Gallery Configuration',
+    'description' => 'Override settings for ca_video_gallery',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ca_video_gallery_settings_form'),
+    'access arguments' => array('worx features admin'),
+    'file' => 'ca_video_gallery.admin.inc',
+    'file path' => drupal_get_path('module', 'ca_video_gallery'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/config/worx_features/video_gallery/general'] = array(
+    'title' => 'General Settings',
+    'description' => 'Override settings for ca_video)gallery',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ca_video_gallery_settings_form'),
+    'access arguments' => array('worx features admin'),
+    'file' => 'ca_video_gallery.admin.inc',
+    'file path' => drupal_get_path('module', 'ca_video_Gallery'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  
+  return $items;
+}
+
+/**
+ * implements hook_menu_alter().
+ */
+function ca_video_gallery_menu_alter(&$items) {
+  $items['video_gallery']['title'] = variable_get('ca_video_gallery_menu_title', 'Videos');
+}
+
+/**
+ * Implements hook_panels_pre_render().
+ */
+function ca_video_gallery_panels_pre_render($panel, $renderer) {
+  if (isset($panel->content['9']) && $panel->content['9']->subtype == 'ca_video-ca_video_gallery_list_1') {
+    $panel->title = variable_get('ca_video_gallery_panel_title', 'Videos');
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function ca_video_gallery_views_pre_view(&$view, &$display_id, &$args) {
+  if ($display_id == 'ca_video_gallery_list_1') {
+    $view->set_items_per_page(variable_get('ca_video_gallery_list_count', 20));
+  }
+}

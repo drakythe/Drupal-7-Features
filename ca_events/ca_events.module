@@ -5,3 +5,47 @@
  */
 
 include_once('ca_events.features.inc');
+
+/**
+ * Implements hook_menu()
+ */
+function ca_events_menu() {
+  $items['admin/config/worx_features/events'] = array(
+    'title' => 'Events Configuration',
+    'description' => 'Override settings for ca_events',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ca_events_settings_form'),
+    'access arguments' => array('worx features admin'),
+    'file' => 'ca_events.admin.inc',
+    'file path' => drupal_get_path('module', 'ca_events'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/config/worx_features/events/general'] = array(
+    'title' => 'General Settings',
+    'description' => 'Override settings for ca_events',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ca_events_settings_form'),
+    'access arguments' => array('worx features admin'),
+    'file' => 'ca_events.admin.inc',
+    'file path' => drupal_get_path('module', 'ca_events'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  
+  return $items;
+}
+
+/**
+ * implements hook_menu_alter().
+ */
+function ca_events_menu_alter(&$items) {
+  $items['events']['title'] = variable_get('ca_events_menu_title', 'Events');
+}
+
+/**
+ * Implements hook_panels_pre_render().
+ */
+function ca_events_panels_pre_render($panel, $renderer) {
+  if (isset($panel->content['new-6']) && $panel->content['new-6']->subtype == 'ca_events-events_calendar') {
+    $panel->title = variable_get('ca_events_panel_title', 'Events');
+  }
+}

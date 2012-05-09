@@ -5,3 +5,59 @@
  */
 
 include_once('ca_testimonials.features.inc');
+
+/**
+ * Implements hook_menu()
+ */
+function ca_testimonials_menu() {
+  $items['admin/config/worx_features/testimonials'] = array(
+    'title' => 'Testimonials Configuration',
+    'description' => 'Override settings for ca_testimonials',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ca_testimonials_settings_form'),
+    'access arguments' => array('worx features admin'),
+    'file' => 'ca_testimonials.admin.inc',
+    'file path' => drupal_get_path('module', 'ca_testimonials'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/config/worx_features/testimonials/general'] = array(
+    'title' => 'General Settings',
+    'description' => 'Override settings for ca_testimonials',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ca_testimonials_settings_form'),
+    'access arguments' => array('worx features admin'),
+    'file' => 'ca_testimonials.admin.inc',
+    'file path' => drupal_get_path('module', 'ca_testimonials'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  
+  return $items;
+}
+
+/**
+ * implements hook_menu_alter().
+ */
+function ca_testimonials_menu_alter(&$items) {
+  $items['testimonial']['title'] = variable_get('ca_testimonials_menu_title', 'Testimonials');
+}
+
+/**
+ * Implements hook_panels_pre_render().
+ */
+function ca_testimonials_panels_pre_render($panel, $renderer) {
+  if (isset($panel->content['new-5']) && $panel->content['new-5']->subtype == 'ca_testimonial-ca_testimonial_list_1') {
+    $panel->title = variable_get('ca_testimonials_panel_title', 'Testimonials');
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function ca_testimonials_views_pre_view(&$view, &$display_id, &$args) {
+  if ($display_id == 'ca_testimonial_list_1') {
+    $view->set_items_per_page(variable_get('ca_testimonials_list_count', 5));
+  }
+  elseif ($display_id == 'ca_testimonial_block_1') {
+    $view->set_items_per_page(variable_get('ca_testimonials_block_count', 1));
+  }
+}

@@ -1,0 +1,24 @@
+#testimonial-images, .views-field-field-ca-testimonial-t-image {
+  float: left;
+  padding-right: 30px;
+}
+
+.view-ca-testimonial .views-field-nothing {
+  clear: both;
+}
+
+.view-ca-testimonial .views-field-title {
+  margin: 0 0 0 230px;
+}
+
+.front .view-ca-testimonial .views-field-title { 
+  margin: 0 0 0 0px; 
+}
+
+.pane-node-field-ca-testimonial-t-link {
+  text-align: right;
+}
+
+#testimonial-images .views-field-field-ca-testimonial-t-image-1 a {
+  padding: 0 5px 5px 0;
+}

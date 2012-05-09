@@ -5,3 +5,59 @@
  */
 
 include_once('ca_blog.features.inc');
+
+/**
+ * Implements hook_menu().
+ */
+function ca_blog_menu() {
+  $items['admin/config/worx_features/blog'] = array(
+    'title' => 'Blog Configuration',
+    'description' => 'Override settings for ca_blog',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ca_blog_settings_form'),
+    'access arguments' => array('worx features admin'),
+    'file' => 'ca_blog.admin.inc',
+    'file path' => drupal_get_path('module', 'ca_blog'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/config/worx_features/blog/general'] = array(
+    'title' => 'General Settings',
+    'description' => 'Override settings for ca_blog',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ca_blog_settings_form'),
+    'access arguments' => array('worx features admin'),
+    'file' => 'ca_blog.admin.inc',
+    'file path' => drupal_get_path('module', 'ca_blog'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function ca_blog_menu_alter(&$items) {
+  $items['blog']['title'] = variable_get('ca_blog_menu_title', 'Blog');
+}
+
+/**
+ * Implements hook_panels_pre_render().
+ */
+function ca_blog_panels_pre_render($panel, $renderer) {
+  if (isset($panel->content['new-8']) && $panel->content['new-8']->subtype == 'ca_blog-ca_blog_list_1') {
+    $panel->title = variable_get('ca_blog_panel_title', 'Blog');
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function ca_blog_views_pre_view(&$view, &$display_id, &$args) {
+  if ($display_id == 'ca_blog_list_1') {
+    $view->set_items_per_page(variable_get('ca_blog_list_count', 5));
+  }
+  elseif ($display_id == 'ca_blog_block_1') {
+    $view->set_items_per_page(variable_get('ca_blog_block_count', 1));
+  }
+}

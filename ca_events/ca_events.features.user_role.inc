@@ -14,6 +14,7 @@ function ca_events_user_default_roles() {
   $roles['event admin'] = array(
     'name' => 'event admin',
     'weight' => '4',
+    'machine_name' => '',
   );
 
   return $roles;

@@ -1,0 +1,6 @@
+name = Auto Profiler
+description = Adds additional configuration to Aegir's site creation form.
+package = Worx Components
+dependencies[] = hosting_site
+version = 6.x-1.0-alpha1
+core = 6.x

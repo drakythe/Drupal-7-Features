@@ -5,3 +5,56 @@
  */
 
 include_once('ca_staff.features.inc');
+
+/**
+ * Implements hook_menu()
+ */
+function ca_staff_menu() {
+  $items['admin/config/worx_features/staff'] = array(
+    'title' => 'Staff Configuration',
+    'description' => 'Override settings for ca_staff',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ca_staff_settings_form'),
+    'access arguments' => array('worx features admin'),
+    'file' => 'ca_staff.admin.inc',
+    'file path' => drupal_get_path('module', 'ca_staff'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/config/worx_features/staff/general'] = array(
+    'title' => 'General Settings',
+    'description' => 'Override settings for ca_staff',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ca_staff_settings_form'),
+    'access arguments' => array('worx features admin'),
+    'file' => 'ca_staff.admin.inc',
+    'file path' => drupal_get_path('module', 'ca_staff'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  
+  return $items;
+}
+
+/**
+ * implements hook_menu_alter().
+ */
+function ca_staff_menu_alter(&$items) {
+  $items['staff']['title'] = variable_get('ca_staff_menu_title', 'Staff');
+}
+
+/**
+ * Implements hook_panels_pre_render().
+ */
+function ca_staff_panels_pre_render($panel, $renderer) {
+  if (isset($panel->content['new-3']) && $panel->content['new-3']->subtype == 'ca_staff-ca_staff_grid_1') {
+    $panel->title = variable_get('ca_staff_panel_title', 'Staff');
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function ca_staff_views_pre_view(&$view, &$display_id, &$args) {
+  if ($display_id == 'ca_staff_grid_1') {
+    $view->set_items_per_page(variable_get('ca_staff_grid_count', 16));
+  }
+}

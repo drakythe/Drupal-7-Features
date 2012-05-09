@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CA FAQ feature.
+ */
+
+include_once 'ca_faq.features.inc';

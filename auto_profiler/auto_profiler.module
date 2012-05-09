@@ -1,0 +1,104 @@
+<?php
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function auto_profiler_form_alter(&$form, $form_state, $form_id) {
+  switch($form_id) {
+    case 'site_node_form':
+      drupal_add_js(drupal_get_path('module', 'auto_profiler') . '/auto_profiler.js');
+      $form['blog_enable'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Enable Blog'),
+        '#default_value' => $form['#node']->blog_enable ? $form['#node']->blog_enable : 0,
+      );
+      $form['auto_profiler_features'] = array(
+        '#type' => 'item',
+        '#title' => t('Features'),
+        '#required' => TRUE,
+      );
+      $form['auto_profiler_features']['feature_list'] = array(
+        '#type' => 'checkboxes',
+        '#title' => t('Available'),
+        '#options' => array(
+          'ca_blog' => t('Blog'),
+          'ca_news' => t('News'),
+        ),
+        '#default_value' => $form['#node']->feature_list ? $form['#node']->feature_list : array(),
+      );
+      $form['auto_profiler_features']['ca_blog'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Blog'),
+        '#collapsed' => TRUE,
+        '#collapsible' => TRUE,
+        '#attributes' => array('id' => 'auto-profiler-blog-fieldset'),
+      );
+      $form['auto_profiler']['blog']['views'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Views Settings'),
+        '#collapsed' => TRUE,
+        '#collapsible' => TRUE,
+      );
+      $form['auto_profiler']['blog']['views']['list_view'] = array(
+        '#type' => 'textfield'
+      );
+      return $form;
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_insert().
+ */
+function auto_profiler_insert($node) {
+  $features = serialize($node->feature_list);
+  db_query("INSERT INTO {auto_profiler} (vid, nid, features) VALUES (%d, %d, '%s')", $node->vid, $node->nid, $features);
+}
+
+/**
+ * Implementation of hook_update().
+ */
+function auto_profiler_update($node) {
+  $features = serialize($node->feature_list);
+  db_query("UPDATE {auto_profiler} SET features = '%s' WHERE nid = %d", $features, $node->nid);
+}
+
+/**
+ * Implementation of hook_delete().
+ */
+function auto_profiler_delete($node) {
+  db_query("DELETE FROM {auto_profiler} WHERE nid = %d", $node->nid);
+}
+
+/**
+ * Implementation of hook_delete_revision().
+ */
+function auto_profiler_delete_revision($node) {
+  db_query("DELETE FROM {auto_profiler} WHERE vid = %d", $node->vid);
+}
+
+/**
+ * Implementation of hook_nodeapi().
+ */
+function auto_profiler_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  if ($node->type == 'site') {
+    switch ($op) {
+      case 'insert':
+        auto_profiler_insert($node);
+        break;
+      case 'update':
+        auto_profiler_update($node);
+        break;
+      case 'delete':
+        auto_profiler_delete($node);
+        break;
+      case 'delete revision':
+        auto_profiler_delete_revision($node);
+        break;
+      case 'load':
+        $additions['feature_list'] = unserialize(db_result(db_query("SELECT features FROM {auto_profiler} WHERE vid = %d", $node->vid)));
+        return $additions;
+        break;
+    }
+  }
+}

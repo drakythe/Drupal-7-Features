@@ -14,6 +14,7 @@ function ca_testimonials_user_default_roles() {
   $roles['testimonials admin'] = array(
     'name' => 'testimonials admin',
     'weight' => '4',
+    'machine_name' => '',
   );
 
   return $roles;

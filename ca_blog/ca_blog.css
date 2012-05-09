@@ -1,0 +1,17 @@
+.page-blog ul.action-links {
+    display: none;
+}
+
+.view-ca-blog .views-field-field-ca-blog-b-image {
+    float: left;
+    padding-right: 30px;
+}
+
+.view-ca-blog .views-field-nothing {
+    clear: both;
+}
+
+.node-type-blog .pane-node-terms li {
+    display: inline-block;
+      padding: 5px;
+}

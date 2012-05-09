@@ -1,0 +1,11 @@
+.view-ca-gallery tr, .view-ca-gallery tr.even, .view-ca-gallery-image tr, .view-ca-gallery-image tr.even  {
+  background: none repeat scroll 0 0 transparent;
+}
+
+.view-ca-gallery tr td, .view-ca-gallery-image tr td {
+  width: 25%
+}
+
+.view-ca-gallery tr td, .view-ca-gallery tr th, .view-ca-gallery-image tr td,  .view-ca-gallery-image tr th {
+  text-align: center;
+}
