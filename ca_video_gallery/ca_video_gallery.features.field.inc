@@ -151,16 +151,27 @@ function ca_video_gallery_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_ca_video_v_video',
-      'foreign keys' => array(),
+      'foreign keys' => array(
+        'fid' => array(
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+          'table' => 'file_managed',
+        ),
+      ),
       'indexes' => array(
         'fid' => array(
           0 => 'fid',
         ),
       ),
-      'module' => 'media',
-      'settings' => array(),
+      'module' => 'file',
+      'settings' => array(
+        'display_default' => 0,
+        'display_field' => 0,
+        'uri_scheme' => 'public',
+      ),
       'translatable' => '0',
-      'type' => 'media',
+      'type' => 'file',
     ),
     'field_instance' => array(
       'bundle' => 'ca_video',
@@ -169,9 +180,9 @@ function ca_video_gallery_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => NULL,
+          'module' => 'file',
           'settings' => array(),
-          'type' => 'media_large',
+          'type' => 'file_default',
           'weight' => 1,
         ),
         'teaser' => array(
@@ -183,10 +194,13 @@ function ca_video_gallery_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_ca_video_v_video',
-      'label' => 'Video',
+      'label' => 'Videos',
       'required' => 0,
       'settings' => array(
+        'description_field' => 0,
+        'file_directory' => '',
         'file_extensions' => 'txt',
+        'max_filesize' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -194,6 +208,7 @@ function ca_video_gallery_field_default_fields() {
         'module' => 'media',
         'settings' => array(
           'allowed_schemes' => array(
+            'private' => 0,
             'public' => 0,
             'vimeo' => 'vimeo',
             'youtube' => 'youtube',
@@ -203,6 +218,13 @@ function ca_video_gallery_field_default_fields() {
             'default' => 0,
             'image' => 0,
             'video' => 'video',
+          ),
+          'browser_plugins' => array(
+            'library' => 'library',
+            'media_default--media_browser_1' => 0,
+            'media_default--media_browser_my_files' => 0,
+            'media_internet' => 'media_internet',
+            'upload' => 0,
           ),
           'progress_indicator' => 'throbber',
         ),
@@ -216,7 +238,7 @@ function ca_video_gallery_field_default_fields() {
   // Included for use with string extractors like potx.
   t('Body');
   t('Comment');
-  t('Video');
+  t('Videos');
 
   return $fields;
 }
